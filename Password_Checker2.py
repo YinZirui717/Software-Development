@@ -5,6 +5,7 @@ def check_password_strength(password):
     if not password:
         return "Password cannot be empty!"
 
+
     score = 0
 
     length = len(password)
@@ -17,6 +18,7 @@ def check_password_strength(password):
     else:
         return "Weak (password id too short)"
 
+
     patterns = {
         "digits": r"\d",
         "uppercase": r"[A-Z]",
@@ -24,9 +26,14 @@ def check_password_strength(password):
         "special_characters": r"[!@#$%^&*(),.?\":{}|<>]"
     }
 
+    missing = []
+
     for key, pattern in patterns.items():
-        if re.search(pattern, password):
+        if not re.search(pattern, password):
+                missing.append(key)
+        else:
             score += 20
+
 
     if score < 50:
         strength = "Weak"
@@ -34,6 +41,9 @@ def check_password_strength(password):
         strength = "Moderate"
     else:
         strength = "Strong"
+
+    if missing:
+        return f"Weak (Your password is missing: {', '.join(missing)})"
 
     return f"Password Strength: {strength} (Score: {score}/100)"
 
