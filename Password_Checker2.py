@@ -17,10 +17,16 @@ def check_password_strength(password):
     else:
         return "Weak (password id too short)"
 
-    if re.search(r"\d", password): score += 20
-    if re.search(r"[A-Z]", password): score += 10
-    if re.search(r"[a-z]", password): score += 10
-    if re.search(r"[!@#$%^&*(),.?\":{}|<>]", password): score += 10
+    patterns = {
+        "digits": r"\d",
+        "uppercase": r"[A-Z]",
+        "lowercase": r"[a-z]",
+        "special_characters": r"[!@#$%^&*(),.?\":{}|<>]"
+    }
+
+    for key, pattern in patterns.items():
+        if re.search(pattern, password):
+            score += 20 
 
     if score < 40:
         strength = "Weak"
