@@ -1,5 +1,5 @@
 import unittest
-from Password_test.Password_Checker2 import check_password_strength
+from Password_test.Password_Checker2 import check_password_stre
 
 
 class TestPasswordStrengthChecker(unittest.TestCase):
