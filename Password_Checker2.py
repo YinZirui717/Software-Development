@@ -36,20 +36,19 @@ def check_password_strength(password):
         else:
             score += 20
 
+    score = min(score, 100)
 
     if score < 50:
-        strength = "Weak"
-    elif 50 <= score < 80:
+        return f"Weak (Your password is missing: {', '.join(missing)})"
+    elif 50 <= score < 90:
         strength = "Moderate"
     else:
         strength = "Strong"
 
-    if score < 50:
-        return f"Weak (Your password is missing: {', '.join(missing)})"
-
-    score = min(score, 100)
-
-    return f"Password Strength: {strength} (Score: {score}/100)"
+    if missing:
+        return f"Password Strength: {strength} (Score: {score}/100) — Missing: {', '.join(missing)}"
+    else:
+        return f"Password Strength: {strength} (Score: {score}/100)"
 
 if __name__ == "__main__":
     password = input("Enter a password: ")
