@@ -35,7 +35,7 @@ class TestPasswordStrengthChecker(unittest.TestCase):
 
     def test_special_chars_missing(self):
         result = check_password_strength("abcABC123")
-        self.assertIn("Your password is missing", result)
+        self.assertIn("Missing: special_characters", result)
 
     def test_max_strength(self):
         result = check_password_strength("aB1@aB1@aB1@")
